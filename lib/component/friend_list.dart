@@ -11,7 +11,6 @@ class FriendListPage extends StatefulWidget {
 }
 
 class _FriendListPageState extends State<FriendListPage> {
-
   List<Friend> _friends = [];
 
   @override
@@ -22,7 +21,8 @@ class _FriendListPageState extends State<FriendListPage> {
 
   _loadFriendsData() async {
     HttpClient httpClient = HttpClient();
-    HttpClientRequest request = await httpClient.getUrl(Uri.parse('https://randomuser.me/api/?results=30'));
+    HttpClientRequest request = await httpClient
+        .getUrl(Uri.parse('https://randomuser.me/api/?results=30'));
     HttpClientResponse response = await request.close();
     String text = await response.transform(utf8.decoder).join();
 
@@ -36,18 +36,16 @@ class _FriendListPageState extends State<FriendListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('好友列表'),
-      ),
-      body: ListView.builder(
-        itemCount: _friends.length,
-        itemBuilder: _buildItem,
-      )
-    );
+        appBar: AppBar(
+          title: const Text('Home Page'),
+        ),
+        body: ListView.builder(
+          itemCount: _friends.length,
+          itemBuilder: _buildItem,
+        ));
   }
 
   Widget _buildItem(BuildContext context, int index) {
-
     var friend = _friends[index];
     return ListTile(
       leading: CircleAvatar(
